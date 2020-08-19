@@ -49,7 +49,7 @@ class TransactionsRepository {
 
   public create({ title, value, type }: CreateTransactionDTO): Transaction {
     const { total } = this.getBalance();
-    if (total - value <= 0 && type === 'outcome') {
+    if (total - value < 0 && type === 'outcome') {
       throw Error('Insufficient balance');
     }
     const transaction = new Transaction({ title, value, type });
